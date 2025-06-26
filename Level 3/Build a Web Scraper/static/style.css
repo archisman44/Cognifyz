@@ -1,0 +1,30 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #343a40;
+}
+
+.table {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pagination-controls {
+    margin-top: 20px;
+}
+
+.pagination-controls button {
+    min-width: 100px;
+}
+
+.pagination-controls span {
+    font-size: 1.1em;
+    color: #343a40;
+}

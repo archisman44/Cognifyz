@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization Tool</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Book Price Visualization Tool</h1>
+        <p class="text-center text-muted mb-5">Interactive visualizations of book prices using data from books.toscrape.com</p>
+
+        <!-- Visualization 1: Histogram -->
+        <div class="mb-5">
+            <h3>Distribution of Book Prices</h3>
+            <div id="graph1"></div>
+        </div>
+
+        <!-- Visualization 2: Bar Chart -->
+        <div class="mb-5">
+            <h3>Top 10 Most Expensive Books</h3>
+            <div id="graph2"></div>
+        </div>
+
+        <!-- Visualization 3: Scatter Plot -->
+        <div class="mb-5">
+            <h3>Scatter Plot of Book Prices</h3>
+            <div id="graph3"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Render Plotly graphs -->
+    <script>
+        // Render Histogram
+        var graph1 = {{ graph1_json | safe }};
+        Plotly.newPlot('graph1', graph1.data, graph1.layout);
+
+        // Render Bar Chart
+        var graph2 = {{ graph2_json | safe }};
+        Plotly.newPlot('graph2', graph2.data, graph2.layout);
+
+        // Render Scatter Plot
+        var graph3 = {{ graph3_json | safe }};
+        Plotly.newPlot('graph3', graph3.data, graph3.layout);
+    </script>
+</body>
+</html>
