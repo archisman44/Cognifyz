@@ -1,136 +1,143 @@
-Data Visualization Tool
-A Flask-based web application that visualizes book price data from books_data.csv (sourced from books.toscrape.com) using interactive Plotly charts. The tool displays a histogram of price distribution, a bar chart of the top 10 most expensive books, and a scatter plot of all book prices with hover details.
-Features
+# 📊 Data Visualization Tool
 
-Loads book data (title and price) from books_data.csv (~1000 books).
-Generates three interactive visualizations:
-Histogram of book prices.
-Bar chart of the top 10 most expensive books.
-Scatter plot of book prices with hover details (title and price).
+A **Flask-based web application** that visualizes book price data from `books_data.csv` (scraped from [books.toscrape.com](http://books.toscrape.com)) using **interactive Plotly charts**.  
+It includes:
 
+- 📉 A histogram of price distribution  
+- 📊 A bar chart of the top 10 most expensive books  
+- 🧮 A scatter plot of all book prices with hover details
 
-Ensures dataset has sufficient entries by re-scraping if needed.
-Uses Plotly for interactivity (hover, zoom, pan).
-Responsive design with Bootstrap and custom CSS.
+---
 
-Technologies
+## 🚀 Features
 
-Backend: Flask, Python
-Visualization: Plotly
-Scraping: BeautifulSoup, Requests (for dataset generation)
-Frontend: HTML, Bootstrap 5.3, JavaScript
-Data Storage: CSV (via pandas)
-Styling: Custom CSS
+- Loads book data (title and price) from `books_data.csv` (~1000 books)
+- Automatically scrapes data if dataset is missing or insufficient
+- Generates **3 interactive visualizations** using Plotly:
+  - **Histogram** of book prices
+  - **Bar Chart** of top 10 most expensive books
+  - **Scatter Plot** of all book prices with hover details
+- Responsive frontend using **Bootstrap**
+- Smooth interaction: hover, zoom, pan
 
-Prerequisites
+---
 
-Python 3.8+
-Stable internet connection (for initial scraping if books_data.csv is missing or insufficient)
+## 🛠️ Technologies
 
-Installation
+| Layer        | Tech Stack                                |
+|--------------|--------------------------------------------|
+| **Backend**  | Flask, Python                              |
+| **Frontend** | HTML, Bootstrap 5.3, JavaScript            |
+| **Visualization** | Plotly                            |
+| **Scraping** | BeautifulSoup, Requests                    |
+| **Data**     | CSV file (`pandas`)                        |
+| **Styling**  | Custom CSS                                 |
 
-Clone the Repository:
-git clone <repository-url>
+---
+
+## ✅ Prerequisites
+
+- Python 3.8+
+- Stable internet connection (for initial data scraping)
+
+---
+
+## 📦 Installation
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/Data-Visualization-Tool.git
 cd Data-Visualization-Tool
+```
 
-
-Create a Virtual Environment:
+### 2. Create a Virtual Environment
+```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Activate:
+# On Linux/macOS:
+source venv/bin/activate
+# On Windows:
+venv\Scripts\activate
+```
 
-
-Install Dependencies:
+### 3. Install Dependencies
+```bash
 pip install flask pandas plotly requests beautifulsoup4
+```
 
+---
 
-Project Structure:
+## 📁 Project Structure
+
+```
 Data-Visualization-Tool/
 ├── app.py
 ├── templates/
 │   └── index.html
 ├── static/
 │   └── style.css
-├── books_data.csv (generated after first run)
+├── books_data.csv          # Generated after first run
 └── README.md
+```
 
+---
 
+## ▶️ Usage
 
-Usage
-
-Run the Application:
+### Run the Application
+```bash
 python app.py
+```
 
+- Access: [http://localhost:5000](http://localhost:5000)
+- On first run, scrapes ~1000 books if `books_data.csv` is missing or has < 500 rows.
 
-The app starts on http://localhost:5000.
-On first run, it scrapes ~1000 books from books.toscrape.com if books_data.csv is missing or has fewer than 500 books.
+### Visualizations
+- 📉 **Histogram**: Price distribution
+- 📊 **Bar Chart**: Top 10 most expensive books
+- 🧮 **Scatter Plot**: All book prices with hover info
 
+> 🖱️ Interact with charts: hover, zoom, pan, and reset.
 
-Access the Web Interface:
+---
 
-Open http://localhost:5000 in a browser.
-View three interactive visualizations:
-Histogram: Price distribution of all books.
-Bar Chart: Top 10 most expensive books.
-Scatter Plot: All book prices with hover details.
+## 🐞 Troubleshooting
 
+### ❌ "No data found"
+- **Cause:** `books_data.csv` is missing or empty  
+- **Fix:** Delete the file and restart the app to trigger scraping
 
-Interact with charts by hovering, zooming, or panning.
+### ❌ Charts not displaying
+- **Cause:** JavaScript/Plotly error  
+- **Fix:** Open browser console (`F12`) and check for Plotly loading issues
 
+### ❌ Only 20 books shown
+- **Cause:** Incomplete scrape  
+- **Fix:** Delete `books_data.csv` and rerun the app
 
-Check Logs:
+### ❌ Network errors during scraping
+- **Cause:** Site blocking or slow connection  
+- **Fix:** Increase `time.sleep(1)` to `time.sleep(2)` in `app.py`
 
-Terminal logs show data loading and scraping progress (e.g., Loaded 1000 books from books_data.csv).
-Useful for debugging if the dataset is incomplete.
+---
 
+## 📝 Notes
 
+- App scrapes up to **1000 books** (50 pages × 20 books) if needed
+- Scatter plot uses **book index** as X-axis and **price** as Y-axis
+- Visualizations are fully interactive using Plotly
 
-Troubleshooting
+---
 
-"No data found" in Visualizations:
+## 🚧 Future Improvements
 
-Cause: books_data.csv is empty or missing.
-Fix: Delete books_data.csv and restart the app to force a scrape. Check terminal logs for errors (e.g., "Network error scraping page X").
+- Add dropdowns or filters (e.g., by price range or category)
+- Upload support for custom CSVs
+- More visualizations: Box plots, heatmaps, etc.
+- Switch between light/dark themes
 
+---
 
-Visualizations Not Displaying:
+## 📄 License
 
-Cause: JavaScript or Plotly rendering issue.
-Fix: Check browser console (F12) for errors. Ensure Plotly.js loaded correctly via CDN.
-
-
-Only 20 Books in Visualizations:
-
-Cause: books_data.csv contains only 20 books from a partial scrape.
-Fix: Delete books_data.csv and restart the app. Verify books_data.csv has ~1000 rows:(Get-Content -Path .\books_data.csv | Measure-Object -Line).Lines
-
-
-
-
-Network Errors During Scraping:
-
-Cause: Connectivity issues or rate limiting by books.toscrape.com.
-Fix: Increase time.sleep(1) to time.sleep(2) in app.py or check your internet connection.
-
-
-Scrape Stops Early:
-
-Cause: Site structure changed or pages inaccessible.
-Fix: Verify http://books.toscrape.com/catalogue/page-2.html in a browser. Update base_url or selectors in app.py if needed.
-
-
-
-Notes
-
-The app scrapes up to 1000 books (50 pages × 20 books) from books.toscrape.com if needed.
-Visualizations are interactive: hover to see details, click and drag to zoom, double-click to reset.
-The scatter plot uses book index as the x-axis for simplicity; prices are on the y-axis.
-
-Future Improvements
-
-Add user input to select visualization types.
-Include filters (e.g., price range, book category if available).
-Support multiple datasets or upload functionality.
-Add more advanced visualizations (e.g., box plots, heatmaps).
-
-License
-MIT License
+[MIT License](LICENSE)
